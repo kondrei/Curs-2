@@ -1,0 +1,14 @@
+#progress-bar {
+	border: 1px solid #999;
+	width: 100%;
+	height: 20px;
+	background-color: black;
+	margin-bottom: 5px;
+	animation-name: progress-bar-animated;
+	animation-duration: 4s;
+}
+
+@keyframes progress-bar-animated {
+	0% {width:0%;}
+	100% {width:100%}
+}
