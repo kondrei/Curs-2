@@ -9,6 +9,7 @@ class Counter {
 		this.output = document.getElementById('timer');
 		this.seconds = 0;
 		this.counter;
+		this.autoStart = options.autoStart;
 
 	}
 
@@ -27,29 +28,34 @@ class Counter {
 			this.startButton.disabled = false;
 			clearInterval(this.counter);
 		});
+		this.start();
 	}
 
 	startCounter() {
 		let secs = Math.floor(this.seconds % 60);
 		let minutes = Math.floor((this.seconds % 3600) / 60);
 		let hours = Math.floor(this.seconds / 3600);
-
 		let displaySeconds = (secs < 10) ? '0' + secs : secs;
 		let displayMinutes = (minutes < 10) ? '0' + minutes : minutes;
 		let displayHours = (hours < 10) ? '0' + hours : hours;
 		this.output.innerHTML = displayHours + ':' + displayMinutes + ':' + displaySeconds;
-		// this.output.innerHTML = 'gata';
 		this.seconds++;
 	}
 
-
+	start() {
+		if (this.autoStart) {
+			this.startButton.disabled = 'true';
+			this.counter = setInterval(() => { this.startCounter() }, 1000);
+		}
+	}
 }
 
 
 const counter = new Counter({
 	idButtonStart: 'button-counter',
 	idButtonReset: 'button-reset',
-	idButtonStop: 'button-stop'
+	idButtonStop: 'button-stop',
+	autoStart: false
 });
 
 counter.init();
